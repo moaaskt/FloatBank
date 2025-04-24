@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function() {
             case 'pin':
                 atmContent.innerHTML = `
                     <div class="pin-screen animate__animated animate__fadeIn">
-                        <h3>Insira sua senha</h3>
+                        <h3>Insira sua senha (1234)</h3>
                         <div class="pin-display">${'•'.repeat(currentPin.length)}</div>
                         <p class="text-muted">Use o teclado para digitar sua senha de 4 dígitos</p>
                     </div>
