@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caixa Eletrônico Moderno</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container-fluid atm-container">
+        <div class="row">
+            <!-- Tela do Caixa Eletrônico -->
+            <div class="col-md-6 mx-auto atm-screen-container">
+                <div class="atm-screen">
+                    <div class="atm-header">
+                        <img src="https://placehold.co/150x50?text=Float+Bank" alt="Logo Banco" class="bank-logo">
+                        <div class="time-display" id="timeDisplay"></div>
+                    </div>
+                    
+                    <div class="atm-content" id="atmContent">
+                        <!-- Conteúdo será carregado dinamicamente via JavaScript -->
+                        <div class="welcome-screen animate__animated animate__fadeIn">
+                            <h2>Seja Bem-vindo ao Float Bank</h2>
+                            <p>Por favor, insira seu cartão</p>
+                            <div class="card-slot">
+                                <div class="card-insert animate__animated animate__pulse animate__infinite" id="insertCard"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-eject-animation" id="cardEjectAnimation" style="display: none;">
+                        <div class="ejecting-card"></div>
+                    </div>
+
+                   
+                    <div class="atm-footer">
+                        <div class="keypad-functions">
+                            <button class="btn btn-function" data-action="cancel">Cancelar</button>
+                            <button class="btn btn-function" data-action="clear">Corrigir</button>
+                            <button class="btn btn-function" data-action="confirm">Confirmar</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Teclado Numérico -->
+                <div class="keypad">
+                    <div class="row">
+                        <div class="col-4"><button class="btn btn-key" data-value="1">1</button></div>
+                        <div class="col-4"><button class="btn btn-key" data-value="2">2</button></div>
+                        <div class="col-4"><button class="btn btn-key" data-value="3">3</button></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4"><button class="btn btn-key" data-value="4">4</button></div>
+                        <div class="col-4"><button class="btn btn-key" data-value="5">5</button></div>
+                        <div class="col-4"><button class="btn btn-key" data-value="6">6</button></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4"><button class="btn btn-key" data-value="7">7</button></div>
+                        <div class="col-4"><button class="btn btn-key" data-value="8">8</button></div>
+                        <div class="col-4"><button class="btn btn-key" data-value="9">9</button></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4"><button class="btn btn-key" data-value="0">0</button></div>
+                        <div class="col-4"><button class="btn btn-key" data-action="backspace"><i class="fas fa-backspace"></i></button></div>
+                        <div class="col-4"><button class="btn btn-key" data-action="enter">Entrar</button></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para mensagens -->
+    <div class="modal fade" id="messageModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="messageModalTitle">Atenção</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="messageModalBody">
+                    Mensagem aqui...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
