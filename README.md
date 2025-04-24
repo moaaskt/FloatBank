@@ -1,8 +1,8 @@
-# 🏦 Simulador de Caixa Eletrônico 
+# <div align="center"> 🏦 Simulador de Caixa Eletrônico  ![Versão](https://img.shields.io/badge/vers%C3%A3o-1.0-blue)
 
 Um simulador de caixa eletrônico com interface moderna, desenvolvido com HTML, CSS, JavaScript e Bootstrap.
 
-![Screenshot do Caixa Eletrônico](https://github.com/moaaskt/FloatBank/blob/main/CapaFloat.jpg)
+![Screenshot do Caixa Eletrônico](https://github.com/moaaskt/FloatBank/blob/main/CapaFloat.jpg) 
 
 
 ## ✨ Funcionalidades
