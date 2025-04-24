@@ -1,8 +1,9 @@
-# 🏦 Simulador de Caixa Eletrônico Moderno
+# 🏦 Simulador de Caixa Eletrônico 
 
-Um simulador de caixa eletrônico com interface moderna, animações fluidas e efeitos sonoros, desenvolvido com HTML, CSS, JavaScript e Bootstrap.
+Um simulador de caixa eletrônico com interface moderna, desenvolvido com HTML, CSS, JavaScript e Bootstrap.
 
-![Screenshot do Caixa Eletrônico](https://via.placeholder.com/800x500?text=Screenshot+do+Caixa+Eletrônico+Float+Bank)
+![Screenshot do Caixa Eletrônico](https://github.com/moaaskt/FloatBank/blob/main/CapaFloat.jpg)
+
 
 ## ✨ Funcionalidades
 
@@ -16,6 +17,19 @@ Um simulador de caixa eletrônico com interface moderna, animações fluidas e e
 - **Tela de boas-vindas** com animação de inserção de cartão
 - **Logout seguro** com animação de ejeção do cartão
 
+## 🎮 Como Usar
+
+1. Na tela inicial, clique no cartão para "inserí-lo" no caixa
+
+2. Digite o PIN (use 1234 para demonstração)
+
+3. Selecione a operação desejada no menu
+
+4. Siga as instruções na tela para cada operação
+
+5. Ao finalizar, selecione "Sair" para retirar o cartão
+
+
 ## 🛠️ Tecnologias Utilizadas
 
 - ![HTML5](https://img.shields.io/badge/-HTML5-E34F26?logo=html5&logoColor=white)
@@ -25,8 +39,20 @@ Um simulador de caixa eletrônico com interface moderna, animações fluidas e e
 - ![Font Awesome](https://img.shields.io/badge/-Font_Awesome-528DD7?logo=font-awesome&logoColor=white)
 - ![Animate.css](https://img.shields.io/badge/-Animate.css-FFC107?logo=animate.css&logoColor=black)
 
-## 🚀 Como Executar o Projeto
+## 📂 Estrutura de Arquivos
 
-1. **Clone o repositório**:
-   ```bash
-   git clone https://github.com/seu-usuario/simulador-caixa-eletronico.git
+ ```bash
+simulador-caixa-eletronico/
+├── index.html          # Página principal
+├── styles.css          # Estilos customizados
+├── script.js           # Lógica principal do caixa
+└── README.md           # Aquivo Leia-me
+ ```
+
+## 📝 Licença
+
+Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE](LICENSE) para detalhes.
+
+## 🙏 Créditos
+
+- Desenvolvido por [Moacir S Neto](https://github.com/moaaskt)
