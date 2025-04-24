@@ -210,6 +210,45 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
                 break;
                 
+            case 'deposit':
+                atmContent.innerHTML = `
+                    <div class="deposit-screen animate__animated animate__fadeIn">
+                        <h3>Depósito</h3>
+                        <div class="deposit-options">
+                            <div class="deposit-option" data-type="cash">
+                                <i class="fas fa-money-bill-wave fa-3x"></i>
+                                <p>Depósito em Espécie</p>
+                            </div>
+                            <div class="deposit-option" data-type="check">
+                                <i class="fas fa-money-check-alt fa-3x"></i>
+                                <p>Depósito de Cheque</p>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between mt-4">
+                            <button class="btn btn-secondary" id="backToMenuFromDeposit">Voltar</button>
+                        </div>
+                    </div>
+                `;
+                
+                // Event listeners para as opções de depósito
+                document.querySelectorAll('.deposit-option').forEach(option => {
+                    option.addEventListener('click', function() {
+                        playSound('click');
+                        const depositType = this.getAttribute('data-type');
+                        showDepositAmountScreen(depositType);
+                    });
+                });
+                
+                document.getElementById('backToMenuFromDeposit').addEventListener('click', function() {
+                    playSound('click');
+                    showScreen('menu');
+                });
+                break;
+                
+            case 'deposit-amount':
+                // Esta tela agora é tratada pela função showDepositAmountScreen
+                break;
+                
             case 'processing':
                 atmContent.innerHTML = `
                     <div class="processing-screen animate__animated animate__fadeIn text-center">
@@ -257,6 +296,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     logout();
                 });
                 break;
+                
+            case 'deposit-receipt':
+                // Esta tela agora é tratada pela função processDeposit
+                break;
         }
     }
     
@@ -272,6 +315,110 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 3000);
     }
     
+    // Mostrar tela de valor do depósito
+    function showDepositAmountScreen(depositType) {
+        atmContent.innerHTML = `
+            <div class="deposit-amount-screen animate__animated animate__fadeIn">
+                <h3>Depósito ${depositType === 'cash' ? 'em Espécie' : 'de Cheque'}</h3>
+                <div class="amount-options">
+                    <div class="amount-option" data-amount="50">R$ 50,00</div>
+                    <div class="amount-option" data-amount="100">R$ 100,00</div>
+                    <div class="amount-option" data-amount="200">R$ 200,00</div>
+                    <div class="amount-option" data-amount="500">R$ 500,00</div>
+                    <input type="number" class="custom-amount" placeholder="Outro valor" min="10">
+                </div>
+                <div class="d-flex justify-content-between mt-4">
+                    <button class="btn btn-secondary" id="backToDepositOptions">Voltar</button>
+                    <button class="btn btn-primary" id="confirmDeposit">Confirmar</button>
+                </div>
+            </div>
+        `;
+        
+        document.querySelectorAll('.amount-option').forEach(option => {
+            option.addEventListener('click', function() {
+                playSound('click');
+                document.querySelector('.custom-amount').value = '';
+                document.querySelectorAll('.amount-option').forEach(o => o.style.backgroundColor = '');
+                this.style.backgroundColor = 'var(--secondary-color)';
+                this.style.color = 'white';
+            });
+        });
+        
+        document.getElementById('backToDepositOptions').addEventListener('click', function() {
+            playSound('click');
+            showScreen('deposit');
+        });
+        
+        document.getElementById('confirmDeposit').addEventListener('click', function() {
+            playSound('click');
+            const selectedOption = document.querySelector('.amount-option[style*="background-color"]');
+            const customAmount = document.querySelector('.custom-amount').value;
+            
+            let amount = 0;
+            
+            if (selectedOption) {
+                amount = parseFloat(selectedOption.getAttribute('data-amount'));
+            } else if (customAmount) {
+                amount = parseFloat(customAmount);
+            }
+            
+            if (amount <= 0 || isNaN(amount)) {
+                showMessage('Erro', 'Por favor, selecione ou informe um valor válido.', 'error');
+                return;
+            }
+            
+            // Processar depósito
+            processDeposit(amount, depositType);
+        });
+    }
+    
+    // Processar depósito
+    function processDeposit(amount, depositType) {
+        lastTransactionAmount = amount;
+        showScreen('processing');
+        
+        // Simular processamento
+        setTimeout(() => {
+            accountBalance += amount;
+            
+            // Mostrar recibo específico para depósito
+            atmContent.innerHTML = `
+                <div class="receipt-screen animate__animated animate__fadeIn">
+                    <h3>Depósito realizado</h3>
+                    <div class="receipt">
+                        <p>BANCO Float Bank</p>
+                        <p>-----------------------------</p>
+                        <p>DATA: ${new Date().toLocaleDateString('pt-BR')}</p>
+                        <p>HORA: ${new Date().toLocaleTimeString('pt-BR', {hour: '2-digit', minute:'2-digit'})}</p>
+                        <p>TIPO: ${depositType === 'cash' ? 'Espécie' : 'Cheque'}</p>
+                        <p>-----------------------------</p>
+                        <p>DEPÓSITO: R$ ${amount.toFixed(2).replace('.', ',')}</p>
+                        <p>SALDO: R$ ${accountBalance.toFixed(2).replace('.', ',')}</p>
+                        <p>-----------------------------</p>
+                        <p>OBRIGADO POR UTILIZAR</p>
+                        <p>NOSSO CAIXA ELETRÔNICO</p>
+                    </div>
+                    <div class="d-flex justify-content-between mt-4">
+                        <button class="btn btn-primary" id="anotherOperationAfterDeposit">Nova operação</button>
+                        <button class="btn btn-secondary" id="exitAfterDeposit">Sair</button>
+                    </div>
+                </div>
+            `;
+            
+            playSound('success');
+            
+            document.getElementById('anotherOperationAfterDeposit').addEventListener('click', function() {
+                playSound('click');
+                showScreen('menu');
+            });
+            
+            document.getElementById('exitAfterDeposit').addEventListener('click', function() {
+                playSound('click');
+                logout();
+            });
+        }, 3000);
+    }
+    
     // Manipular opção do menu
     function handleMenuOption(option) {
         switch(option) {
@@ -282,7 +429,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 showScreen('withdraw');
                 break;
             case 'deposit':
-                showMessage('Informação', 'Serviço de depósito indisponível no momento.', 'error');
+                showScreen('deposit'); // Agora mostra a tela de depósito em vez da mensagem
                 break;
             case 'exit':
                 logout();
